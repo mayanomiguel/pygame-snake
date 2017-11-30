@@ -75,7 +75,7 @@ def snake_ran_out_of_bounds(snake):
     snake - list of 2-tuples representing the positions of each snake segment
     Note that the grid is GRID_WIDTH cells wide and GRID_HEIGHT cells high.
     """
-     return False
+    return False
 
 def snake_intersected_body(snake):
     """Returns whether the snake has ran into itself.
