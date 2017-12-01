@@ -48,6 +48,10 @@ def get_direction(previous_direction, event_key):
         return DIRECTION_LEFT
     elif event_key == pygame.K_UP:
         return DIRECTION_UP
+    elif event_key == pygame.K_DOWN:
+        return DIRECTION_DOWN
+    elif event_key == pygame.K_RIGHT:
+        return DIRECTION_RIGHT
     return previous_direction
 
 def create_food_position():
@@ -75,6 +79,14 @@ def snake_ran_out_of_bounds(snake):
     snake - list of 2-tuples representing the positions of each snake segment
     Note that the grid is GRID_WIDTH cells wide and GRID_HEIGHT cells high.
     """
+    if snake[0][0] < 0:
+        return True
+    if snake[0][0] > 29:
+        return True
+    if snake[1][1] < 0:
+        return True
+    if snake[1][1] > 29:
+        return True
     return False
 
 def snake_intersected_body(snake):
@@ -83,6 +95,10 @@ def snake_intersected_body(snake):
     The snake ran into itself if the position of the head is the same as the position
     of any of its body segments.
     """
+
+    for element in range(1, len(snake)):
+        if snake[element] == snake[0]:
+            return True
     return False
 
 def get_score(snake):
@@ -91,14 +107,22 @@ def get_score(snake):
     The user earns 10 points for each of the segments in the snake.
     For example, if the snake has 25 segments, the score is 250.
     """
-    return 0
+    count = 0
+    if snake_ate_food:
+        count += 10
+    else:
+        count = 0
+    return count
 
 def get_game_over_text(score):
     """Returns the text to draw on the screen after the game is over.
     This text should contain 'Game Over' as well as the score.
     score - integer representing the current score of the game.
     """
-    return 'Game Over.'
+##    score = get_score(snake)
+##    if snake_ran_out_of_bounds or snake_intersected_body:
+##        score = 'Game Over. Score:' + score
+##        return score  
 
 def get_snake_speed(snake):
     """Return the number of cells the snake should travel in one second.
@@ -198,6 +222,8 @@ def process_events(direction, game_over):
     for event in pygame.event.get():
         # Quit the program when the user presses the x in the corner of the window.
         if event.type == pygame.QUIT:
+            pygame.display.quit()
+            pygame.quit()
             sys.exit()
         # Process events when the user presses a key on the keyboard.
         # https://www.pygame.org/docs/ref/key.html
