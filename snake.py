@@ -131,7 +131,7 @@ def get_snake_speed(snake):
     the speed of the game should increase (by how much is up to you).
     """
     if len(snake) >= 20:
-        speed = len(snake) - 5
+        speed = 10
         return speed
     return 5
 
