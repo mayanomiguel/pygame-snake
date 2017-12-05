@@ -88,9 +88,9 @@ def snake_ran_out_of_bounds(snake):
         return True
     if snake[0][0] > 29:
         return True
-    if snake[1][1] < 0:
+    if snake[0][1] < 0:
         return True
-    if snake[1][1] > 29:
+    if snake[0][1] > 29:
         return True
     return False
 
