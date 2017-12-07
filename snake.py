@@ -130,7 +130,7 @@ def get_snake_speed(snake):
     The speed at the beginning of the game should be 5. Once the snake has eaten 10 pieces of food,
     the speed of the game should increase (by how much is up to you).
     """
-    if len(snake) >= 20:
+    if len(snake) >= 15:
         speed = 10
         return speed
     return 5
